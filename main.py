@@ -31,7 +31,7 @@ class Unlimited:
     # Add operator ( + )
     def __add__(self, other):
         if isinstance(other, Unlimited):
-            return self.unlimitedNumber + other.unlimitedNumber
+            return Unlimited(self.unlimitedNumber + other.unlimitedNumber)
 
     # Add with assignemnet to left side operator ( += )
     def __iadd__(self, other):
@@ -40,19 +40,19 @@ class Unlimited:
             return self
 
     # Postincrement operator ( self++ )
-    def __postincrement__(self):
+    def postincrement(self):
         self.unlimitedNumber = self.unlimitedNumber+1
         return self
 
     # Preincrement operator ( ++self )
-    def __preincrement__(self):
+    def preincrement(self):
         self.unlimitedNumber = self.unlimitedNumber+1
         return  Unlimited(self.unlimitedNumber-1)
 
     # Sub operator ( - )
     def __sub__(self, other):
         if isinstance(other, Unlimited):
-            return self.unlimitedNumber - other.unlimitedNumber
+            return Unlimited(self.unlimitedNumber - other.unlimitedNumber)
 
     # Sub with assignemnet to left side operator ( -= )
     def __isub__(self, other):
@@ -61,21 +61,26 @@ class Unlimited:
             return self
 
     # Postdecincrement operator ( self-- )
-    def __postdecincrement__(self):
+    def postdecincrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
         return self
 
     # Preincrement operator ( --self )
-    def __predecincrement__(self):
+    def predecincrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
         return  Unlimited(self.unlimitedNumber+1)
 
     def __str__(self):
         return str(self.unlimitedNumber)
 
-    def __random__(self):
-        self.unlimitedNumber = random.randint(-sys.maxsize, sys.maxsize)
+    def randomunlimitednumber(self):
+        self.unlimitedNumber = random.random()*100
         return self.unlimitedNumber
+
+
+   # def __random__(self):
+        #self.unlimitedNumber = random.randint(-sys.maxsize, sys.maxsize)
+   #     return self.unlimitedNumber
 
 
 
@@ -83,6 +88,11 @@ class Unlimited:
 
 un1 = Unlimited(1235)
 un2 = Unlimited(123)
+
+un1 = un1 + un2
+
+#print(un1)
+
 
 
 
