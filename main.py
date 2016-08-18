@@ -74,20 +74,14 @@ class Unlimited:
         return str(self.unlimitedNumber)
 
     def randomunlimitednumber(self):
-        self.unlimitedNumber = random.random()*100
+        try:
+         #randNumber = random.randint(1,1000000)
+         self.unlimitedNumber = random.randrange(random.getrandbits(sys.maxsize));
+        except Exception as e:
+            print ("Couldn't create random number", e)
+        if (False == bool(random.getrandbits(1))):
+            return  -self.unlimitedNumber
         return self.unlimitedNumber
-
-
-
-
-
-
-
-   # def __random__(self):
-        #self.unlimitedNumber = random.randint(-sys.maxsize, sys.maxsize)
-   #     return self.unlimitedNumber
-
-
 
 
 
@@ -95,9 +89,11 @@ un1 = Unlimited(1235)
 un2 = Unlimited(123)
 
 un1 = un1 + un2
-
-print(un1)
-
+for number in range(100):
+    un2.unlimitedNumber = un2.randomunlimitednumber();
+    if (un2.unlimitedNumber <1000):
+        print("\n")
+        print(un2)
 
 
 
