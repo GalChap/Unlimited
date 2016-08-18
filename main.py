@@ -75,8 +75,8 @@ class Unlimited:
 
     def randomunlimitednumber(self):
         try:
-         #randNumber = random.randint(1,1000000)
-         self.unlimitedNumber = random.randrange(random.getrandbits(sys.maxsize));
+         randNumber = random.randint(1,1000000)
+         self.unlimitedNumber = random.randrange(random.getrandbits(randNumber));
         except Exception as e:
             print ("Couldn't create random number", e)
         if (False == bool(random.getrandbits(1))):
@@ -91,9 +91,8 @@ un2 = Unlimited(123)
 un1 = un1 + un2
 for number in range(100):
     un2.unlimitedNumber = un2.randomunlimitednumber();
-    if (un2.unlimitedNumber <1000):
-        print("\n")
-        print(un2)
+    print("\n")
+    print(un2)
 
 
 
