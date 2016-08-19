@@ -1,11 +1,12 @@
 import unittest
-from main import Unlimited
+from Unlimited import Unlimited
 
 
 
 
 class TestUnlimited(unittest.TestCase):
 
+    # Unit test for equal operator
     def test_equalOperator(self):
             test1 = Unlimited(1234)
             test2 = Unlimited(1234)
@@ -13,6 +14,7 @@ class TestUnlimited(unittest.TestCase):
             test1.unlimitedNumber = 123
             self.assertEquals(test1 == test2, False)
 
+    # Unit test for not equal operator
     def test_notEqualOperator(self):
         test1 = Unlimited(1234)
         test2 = Unlimited(1234)
@@ -20,6 +22,7 @@ class TestUnlimited(unittest.TestCase):
         test1.unlimitedNumber = 123
         self.assertEquals(test1 != test2, True)
 
+    # Unit test for less equal operator
     def test_lessEqualOperator(self):
         test1 = Unlimited(1234)
         test2 = Unlimited(1234)
@@ -29,6 +32,7 @@ class TestUnlimited(unittest.TestCase):
         test1.unlimitedNumber = 123
         self.assertEquals(test1 <= test2, True)
 
+    # Unit test for greater equal operator
     def test_greaterEqualOperator(self):
         test1 = Unlimited(1234)
         test2 = Unlimited(1234)
@@ -38,6 +42,7 @@ class TestUnlimited(unittest.TestCase):
         test1.unlimitedNumber = 123
         self.assertEquals(test1 >= test2, False)
 
+    # Unit test for add operator
     def test_addOperator(self):
         test1 = Unlimited(12)
         test2 = Unlimited(12)
@@ -53,7 +58,7 @@ class TestUnlimited(unittest.TestCase):
         addResult = test1 + test2
         self.assertEquals(addResult.unlimitedNumber, 2)
 
-
+    # Unit test for add with assignment to left side operator
     def test_iaddOperator(self):
         test1 = Unlimited(12)
         test2 = Unlimited(12)
@@ -70,7 +75,25 @@ class TestUnlimited(unittest.TestCase):
         test1 += test2
         self.assertEquals(test1.unlimitedNumber, 2)
 
+    # Unit test for add post-increment operator
+    def test_postIncrement(self):
+        test1 = Unlimited(12)
+        self.assertEquals(test1.postIncrement().unlimitedNumber, 13)
+        self.assertEquals(test1.unlimitedNumber, 13)
+        test1.unlimitedNumber = -10
+        self.assertEquals(test1.postIncrement().unlimitedNumber, -9)
+        self.assertEquals(test1.unlimitedNumber, -9)
 
+    # Unit test for add pre-increment operator
+    def test_preIncrement(self):
+        test1 = Unlimited(12)
+        self.assertEquals(test1.preIncrement().unlimitedNumber, 12)
+        self.assertEquals(test1.unlimitedNumber, 13)
+        test1.unlimitedNumber = -10
+        self.assertEquals(test1.preIncrement().unlimitedNumber, -10)
+        self.assertEquals(test1.unlimitedNumber, -9)
+
+    # Unit test for sub operator
     def test_subOperator(self):
         test1 = Unlimited(12)
         test2 = Unlimited(12)
@@ -87,6 +110,7 @@ class TestUnlimited(unittest.TestCase):
         subResult = test1 - test2
         self.assertEquals(subResult.unlimitedNumber, 10)
 
+    # Unit test for sub with assignemnet to left side operator
     def test_isubOperator(self):
         test1 = Unlimited(12)
         test2 = Unlimited(12)
@@ -103,38 +127,25 @@ class TestUnlimited(unittest.TestCase):
         test1 -= test2
         self.assertEquals(test1.unlimitedNumber, 5)
 
-    def test_postincrement(self):
+    # Unit test for sub post-decrement operator
+    def test_postDecrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.postincrement().unlimitedNumber, 13)
-        self.assertEquals(test1.unlimitedNumber, 13)
-        test1.unlimitedNumber = -10
-        self.assertEquals(test1.postincrement().unlimitedNumber, -9)
-        self.assertEquals(test1.unlimitedNumber, -9)
-
-    def test_preincrement(self):
-        test1 = Unlimited(12)
-        self.assertEquals(test1.preincrement().unlimitedNumber, 12)
-        self.assertEquals(test1.unlimitedNumber, 13)
-        test1.unlimitedNumber = -10
-        self.assertEquals(test1.preincrement().unlimitedNumber, -10)
-        self.assertEquals(test1.unlimitedNumber, -9)
-
-    def test_postdecincrement(self):
-        test1 = Unlimited(12)
-        self.assertEquals(test1.postdecincrement().unlimitedNumber, 11)
+        self.assertEquals(test1.postDecrement().unlimitedNumber, 11)
         self.assertEquals(test1.unlimitedNumber, 11)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.postdecincrement().unlimitedNumber, -11)
+        self.assertEquals(test1.postDecrement().unlimitedNumber, -11)
         self.assertEquals(test1.unlimitedNumber, -11)
 
-    def test_predecincrement(self):
+    # Unit test for sub post-decrement operator
+    def test_preDecrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.predecincrement().unlimitedNumber, 12)
+        self.assertEquals(test1.preDecrement().unlimitedNumber, 12)
         self.assertEquals(test1.unlimitedNumber, 11)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.predecincrement().unlimitedNumber, -10)
+        self.assertEquals(test1.preDecrement().unlimitedNumber, -10)
         self.assertEquals(test1.unlimitedNumber, -11)
 
+    # Unit test for print operator
     def test_printOperator(self):
         test1 = Unlimited(12)
         # auto invoke __str__

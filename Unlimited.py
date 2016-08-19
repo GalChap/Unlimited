@@ -1,8 +1,9 @@
 import random
-import sys
+
 
 class Unlimited:
 
+    # Constructor for unlimited class
     def __init__(self, unlimitedNumber = 0):
             self.unlimitedNumber = unlimitedNumber
 
@@ -28,26 +29,30 @@ class Unlimited:
         if isinstance(other, Unlimited):
             return self.unlimitedNumber >= other.unlimitedNumber
 
+    #  Add operators
+
     # Add operator ( + )
     def __add__(self, other):
         if isinstance(other, Unlimited):
             return Unlimited(self.unlimitedNumber + other.unlimitedNumber)
 
-    # Add with assignemnet to left side operator ( += )
+    # Add with assignment to left side operator ( += )
     def __iadd__(self, other):
         if isinstance(other, Unlimited):
             self = self + other
             return self
 
     # Postincrement operator ( self++ )
-    def postincrement(self):
+    def postIncrement(self):
         self.unlimitedNumber = self.unlimitedNumber+1
         return self
 
     # Preincrement operator ( ++self )
-    def preincrement(self):
+    def preIncrement(self):
         self.unlimitedNumber = self.unlimitedNumber+1
         return  Unlimited(self.unlimitedNumber-1)
+
+    # Sub operators
 
     # Sub operator ( - )
     def __sub__(self, other):
@@ -60,28 +65,31 @@ class Unlimited:
             self = self - other
             return self
 
-    # Postdecincrement operator ( self-- )
-    def postdecincrement(self):
+    # Postdecrement operator ( self-- )
+    def postDecrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
         return self
 
-    # Preincrement operator ( --self )
-    def predecincrement(self):
+    # Predecrement operator ( --self )
+    def preDecrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
         return  Unlimited(self.unlimitedNumber+1)
 
+    # Print operator
     def __str__(self):
         return str(self.unlimitedNumber)
 
-    def randomunlimitednumber(self):
+    # Create random number to Unlimited object.
+    # return Unlimited object
+    def randomUnlimitedNumber(self):
         try:
          randNumber = random.randint(1,1000000)
          self.unlimitedNumber = random.randrange(random.getrandbits(randNumber));
         except Exception as e:
             print ("Couldn't create random number", e)
-        if (False == bool(random.getrandbits(1))):
-            return  -self.unlimitedNumber
-        return self.unlimitedNumber
+        if (False == random.choice((True,False))):
+            self.unlimitedNumber = -self.unlimitedNumber
+        return self
 
 
 
@@ -90,7 +98,7 @@ un2 = Unlimited(123)
 
 un1 = un1 + un2
 for number in range(100):
-    un2.unlimitedNumber = un2.randomunlimitednumber();
+    un2 = un2.randomUnlimitedNumber();
     print("\n")
     print(un2)
 
