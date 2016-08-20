@@ -1,6 +1,6 @@
 import unittest
 from Unlimited import Unlimited
-
+import  sys
 
 
 
@@ -148,13 +148,18 @@ class TestUnlimited(unittest.TestCase):
     # Unit test for print operator
     def test_printOperator(self):
         test1 = Unlimited(12)
-        # auto invoke __str__
         self.assertEqual(str(test1), '12')
         self.assertNotEquals(str(test1), '13')
         test1.unlimitedNumber = -5
         self.assertEqual(str(test1), '-5')
         self.assertNotEquals(str(test1), '5')
 
+    # Unit test for random function
+    def test_randomUnlimitedNumber(self):
+        test1 = Unlimited()
+        test1.randomUnlimitedNumber(100)
+        self.assertIsInstance(test1.unlimitedNumber,int)
+        self.assertRaises(Exception, test1.randomUnlimitedNumber(sys.maxsize*10))
 
 if __name__ == '__main__':
     unittest.main()

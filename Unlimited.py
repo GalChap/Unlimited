@@ -81,26 +81,15 @@ class Unlimited:
 
     # Create random number to Unlimited object.
     # return Unlimited object
-    def randomUnlimitedNumber(self):
+    def randomUnlimitedNumber(self,upperRange):
         try:
-         randNumber = random.randint(1,1000000)
+         randNumber = random.randint(1,upperRange)
          self.unlimitedNumber = random.randrange(random.getrandbits(randNumber));
         except Exception as e:
             print ("Couldn't create random number", e)
         if (False == random.choice((True,False))):
             self.unlimitedNumber = -self.unlimitedNumber
         return self
-
-
-
-un1 = Unlimited(1235)
-un2 = Unlimited(123)
-
-un1 = un1 + un2
-for number in range(100):
-    un2 = un2.randomUnlimitedNumber();
-    print("\n")
-    print(un2)
 
 
 
