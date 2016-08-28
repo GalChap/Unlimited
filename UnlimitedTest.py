@@ -161,5 +161,36 @@ class TestUnlimited(unittest.TestCase):
         self.assertIsInstance(test1.unlimitedNumber,int)
         self.assertRaises(Exception, test1.randomUnlimitedNumber(sys.maxsize*10))
 
+    # Unit test for check Unilmited type limits
+    def test_unlimitedTypeLimits(self):
+        test1 = Unlimited()
+        test1.randomUnlimitedNumber(100)
+        test2 = Unlimited()
+        test2.randomUnlimitedNumber(100)
+        if test1 >= test2:
+            print("if")
+            self.assertGreaterEqual(test1, test2)
+            result = test1 + test2
+            self.assertEqual(result, test1 + test2)
+            result.unlimitedNumber = 0
+            result+= test1
+            self.assertEqual(result, test1)
+            self.assertEqual(result.postIncrement().unlimitedNumber, test1.unlimitedNumber + 1)
+            test1.postIncrement()
+            self.assertEqual(result.preIncrement().unlimitedNumber, test1.unlimitedNumber)
+            print(test1)
+            print(test2)
+        elif test1 <= test2:
+            print("else")
+            self.assertLessEqual(test1, test2)
+            result = test2 + test1
+            self.assertEqual(result, test2 + test1)
+            print(test1)
+            print(test2)
+
+'''
+
+'''
+
 if __name__ == '__main__':
     unittest.main()
