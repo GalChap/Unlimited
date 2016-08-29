@@ -6,6 +6,17 @@ import  sys
 
 class TestUnlimited(unittest.TestCase):
 
+
+    # Unit test for equal operator
+    def test_equalOperator(self, test1, test2):
+        self.assertEquals(test1 == test2, True)
+
+    def test_unlimitedTypeLimits(self):
+        test1 = Unlimited(123)
+        test2 = Unlimited(123)
+        self.test_equalOperator(test1, test2)
+
+    '''
     # Unit test for equal operator
     def test_equalOperator(self):
             test1 = Unlimited(1234)
@@ -190,7 +201,9 @@ class TestUnlimited(unittest.TestCase):
 
 '''
 
-'''
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
