@@ -9,8 +9,8 @@ class TestUnlimited(unittest.TestCase):
     global test_unlimitedTypeLimitsLoop
     test_unlimitedTypeLimitsLoop = 100
 
-    global test_unlimitedTypeLimitsSizeOfNumner
-    test_unlimitedTypeLimitsSizeOfNumner = 100000
+    global test_unlimitedTypeLimitsSizeOfNumber
+    test_unlimitedTypeLimitsSizeOfNumber = 100000
 
     # Unit test for equal operator
     def test_equalOperator(self):
@@ -172,10 +172,10 @@ class TestUnlimited(unittest.TestCase):
         for number in range (test_unlimitedTypeLimitsLoop):
             test1 = Unlimited()
             # Use of create random number function
-            test1.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumner)
+            test1.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumber)
             test2 = Unlimited()
             # Use of create random number function
-            test2.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumner)
+            test2.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumber)
             if test1 >= test2:
                 self.assertGreaterEqual(test1, test2)
                 self.addOperatorTest(test1, test2)

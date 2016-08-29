@@ -91,24 +91,3 @@ class Unlimited:
             self.unlimitedNumber = -self.unlimitedNumber
         return self
 
-'''
-test1 = Unlimited()
-for number in range(100):
-    test1.randomUnlimitedNumber(100000)
-    print('\n')
-    print(test1)
-
-
-for number in range(10):
-    print('\n')
-    test1 = Unlimited()
-    test1.randomUnlimitedNumber(1000)
-    test2 = Unlimited()
-    test2.randomUnlimitedNumber(1000)
-    if test1 >= test2:
-        test1 -= test2
-        print(test1)
-    else:
-        test2 -= test1
-        print(test2)
-'''
