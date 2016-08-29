@@ -45,12 +45,12 @@ class Unlimited:
     # Postincrement operator ( self++ )
     def postIncrement(self):
         self.unlimitedNumber = self.unlimitedNumber+1
-        return self
+        return  Unlimited(self.unlimitedNumber-1)
 
     # Preincrement operator ( ++self )
     def preIncrement(self):
-        self.unlimitedNumber = self.unlimitedNumber+1
-        return  Unlimited(self.unlimitedNumber-1)
+        self.unlimitedNumber = self.unlimitedNumber + 1
+        return self
 
     # Sub operators
 
@@ -68,12 +68,12 @@ class Unlimited:
     # Postdecrement operator ( self-- )
     def postDecrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
-        return self
+        return  Unlimited(self.unlimitedNumber+1)
 
     # Predecrement operator ( --self )
     def preDecrement(self):
         self.unlimitedNumber = self.unlimitedNumber-1
-        return  Unlimited(self.unlimitedNumber+1)
+        return self
 
     # Print operator
     def __str__(self):

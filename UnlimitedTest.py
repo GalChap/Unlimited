@@ -8,16 +8,6 @@ class TestUnlimited(unittest.TestCase):
 
 
     # Unit test for equal operator
-    def test_equalOperator(self, test1, test2):
-        self.assertEquals(test1 == test2, True)
-
-    def test_unlimitedTypeLimits(self):
-        test1 = Unlimited(123)
-        test2 = Unlimited(123)
-        self.test_equalOperator(test1, test2)
-
-    '''
-    # Unit test for equal operator
     def test_equalOperator(self):
             test1 = Unlimited(1234)
             test2 = Unlimited(1234)
@@ -89,19 +79,19 @@ class TestUnlimited(unittest.TestCase):
     # Unit test for add post-increment operator
     def test_postIncrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.postIncrement().unlimitedNumber, 13)
+        self.assertEquals(test1.postIncrement().unlimitedNumber, 12)
         self.assertEquals(test1.unlimitedNumber, 13)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.postIncrement().unlimitedNumber, -9)
+        self.assertEquals(test1.postIncrement().unlimitedNumber, -10)
         self.assertEquals(test1.unlimitedNumber, -9)
 
     # Unit test for add pre-increment operator
     def test_preIncrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.preIncrement().unlimitedNumber, 12)
+        self.assertEquals(test1.preIncrement().unlimitedNumber, 13)
         self.assertEquals(test1.unlimitedNumber, 13)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.preIncrement().unlimitedNumber, -10)
+        self.assertEquals(test1.preIncrement().unlimitedNumber, -9)
         self.assertEquals(test1.unlimitedNumber, -9)
 
     # Unit test for sub operator
@@ -141,19 +131,19 @@ class TestUnlimited(unittest.TestCase):
     # Unit test for sub post-decrement operator
     def test_postDecrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.postDecrement().unlimitedNumber, 11)
+        self.assertEquals(test1.postDecrement().unlimitedNumber, 12)
         self.assertEquals(test1.unlimitedNumber, 11)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.postDecrement().unlimitedNumber, -11)
+        self.assertEquals(test1.postDecrement().unlimitedNumber, -10)
         self.assertEquals(test1.unlimitedNumber, -11)
 
     # Unit test for sub post-decrement operator
     def test_preDecrement(self):
         test1 = Unlimited(12)
-        self.assertEquals(test1.preDecrement().unlimitedNumber, 12)
+        self.assertEquals(test1.preDecrement().unlimitedNumber, 11)
         self.assertEquals(test1.unlimitedNumber, 11)
         test1.unlimitedNumber = -10
-        self.assertEquals(test1.preDecrement().unlimitedNumber, -10)
+        self.assertEquals(test1.preDecrement().unlimitedNumber, -11)
         self.assertEquals(test1.unlimitedNumber, -11)
 
     # Unit test for print operator
@@ -171,7 +161,7 @@ class TestUnlimited(unittest.TestCase):
         test1.randomUnlimitedNumber(100)
         self.assertIsInstance(test1.unlimitedNumber,int)
         self.assertRaises(Exception, test1.randomUnlimitedNumber(sys.maxsize*10))
-
+    '''
     # Unit test for check Unilmited type limits
     def test_unlimitedTypeLimits(self):
         test1 = Unlimited()
@@ -198,8 +188,55 @@ class TestUnlimited(unittest.TestCase):
             self.assertEqual(result, test2 + test1)
             print(test1)
             print(test2)
+    '''
 
-'''
+    # Help function for equal operator
+    def equalOperatorTest(self, test1, test2):
+     self.assertEquals(test1 == test2, True)
+
+    # Help function for add operator
+    def addOperatorTest(self, test1, test2):
+        result = test1 + test2
+        self.assertEquals(result, test1 + test2)
+
+    # Help function for iadd operator
+    def iaddOperatorTest(self, test1, test2):
+        result = test1
+        test1 += test2
+        self.assertEquals(test1, result + test2)
+
+    # Help function for postIncrement operator
+    def postIncrementOperatorTest(self, test1):
+        result = test1.unlimitedNumber
+        self.assertEquals(test1.postIncrement().unlimitedNumber, result)
+        # to show that test1 value change after reading it's value
+        self.assertEquals(test1.unlimitedNumber, result + 1)
+
+
+    # Help function for preIncrement operator
+    def preIncrementOperatorTest(self, test1):
+        result = test1.unlimitedNumber
+        self.assertEquals(test1.preIncrement().unlimitedNumber, result + 1)
+        # to ensure that test1 value change before reading the value
+        self.assertEquals(test1.unlimitedNumber, result + 1)
+
+    # Unit test for check Unilmited type limits
+    def test_unlimitedTypeLimits(self):
+        test1 = Unlimited()
+        test1.randomUnlimitedNumber(100)
+        test2 = Unlimited()
+        test2.randomUnlimitedNumber(100)
+        if test1 >= test2:
+            print("if")
+            self.assertGreaterEqual(test1, test2)
+           # self.equalOperatorTest(test1, test2)
+            self.addOperatorTest(test1, test2)
+            self.iaddOperatorTest(test1, test2)
+            self.postIncrementOperatorTest(test1)
+            self.preIncrementOperatorTest(test1)
+            print("end if")
+        else:
+            print("else")
 
 
 
