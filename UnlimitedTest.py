@@ -6,6 +6,11 @@ import  sys
 
 class TestUnlimited(unittest.TestCase):
 
+    global test_unlimitedTypeLimitsLoop
+    test_unlimitedTypeLimitsLoop = 100
+
+    global test_unlimitedTypeLimitsSizeOfNumner
+    test_unlimitedTypeLimitsSizeOfNumner = 100000
 
     # Unit test for equal operator
     def test_equalOperator(self):
@@ -161,85 +166,90 @@ class TestUnlimited(unittest.TestCase):
         test1.randomUnlimitedNumber(100)
         self.assertIsInstance(test1.unlimitedNumber,int)
         self.assertRaises(Exception, test1.randomUnlimitedNumber(sys.maxsize*10))
-    '''
-    # Unit test for check Unilmited type limits
-    def test_unlimitedTypeLimits(self):
-        test1 = Unlimited()
-        test1.randomUnlimitedNumber(100)
-        test2 = Unlimited()
-        test2.randomUnlimitedNumber(100)
-        if test1 >= test2:
-            print("if")
-            self.assertGreaterEqual(test1, test2)
-            result = test1 + test2
-            self.assertEqual(result, test1 + test2)
-            result.unlimitedNumber = 0
-            result+= test1
-            self.assertEqual(result, test1)
-            self.assertEqual(result.postIncrement().unlimitedNumber, test1.unlimitedNumber + 1)
-            test1.postIncrement()
-            self.assertEqual(result.preIncrement().unlimitedNumber, test1.unlimitedNumber)
-            print(test1)
-            print(test2)
-        elif test1 <= test2:
-            print("else")
-            self.assertLessEqual(test1, test2)
-            result = test2 + test1
-            self.assertEqual(result, test2 + test1)
-            print(test1)
-            print(test2)
-    '''
 
-    # Help function for equal operator
-    def equalOperatorTest(self, test1, test2):
-     self.assertEquals(test1 == test2, True)
+    # Unit test for check multiple pair of Unilmited type instance
+    def test_unlimitedTypeLimits(self):
+        for number in range (test_unlimitedTypeLimitsLoop):
+            test1 = Unlimited()
+            # Use of create random number function
+            test1.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumner)
+            test2 = Unlimited()
+            # Use of create random number function
+            test2.randomUnlimitedNumber(test_unlimitedTypeLimitsSizeOfNumner)
+            if test1 >= test2:
+                self.assertGreaterEqual(test1, test2)
+                self.addOperatorTest(test1, test2)
+                self.iaddOperatorTest(test1, test2)
+                self.postIncrementOperatorTest(test1)
+                self.preIncrementOperatorTest(test1)
+                self.subOperatorTest(test1, test2)
+                self.isubOperatorTest(test1, test2)
+                self.postDecrementOperatorTest(test1)
+                self.preDecrementOperatorTest(test1)
+                #Use of printOperator
+                print("Test number 1:",test1, "\nIs greater equal from", "\nTest number 2:",test2, "\n")
+            else:
+                self.assertLessEqual(test1, test2)
+                self.addOperatorTest(test1, test2)
+                self.iaddOperatorTest(test1, test2)
+                self.postIncrementOperatorTest(test1)
+                self.preIncrementOperatorTest(test1)
+                self.subOperatorTest(test2, test1)
+                self.isubOperatorTest(test2, test1)
+                self.postDecrementOperatorTest(test1)
+                self.preDecrementOperatorTest(test1)
+                # Use of printOperator
+                print("Test number 1:",test1, "\nIs less equal from", "\nTest number 2:",test2, "\n")
 
     # Help function for add operator
-    def addOperatorTest(self, test1, test2):
-        result = test1 + test2
-        self.assertEquals(result, test1 + test2)
+    def addOperatorTest(self, test1Param, test2Param):
+        result = test1Param + test2Param
+        self.assertEquals(result, test1Param + test2Param)
 
-    # Help function for iadd operator
-    def iaddOperatorTest(self, test1, test2):
-        result = test1
-        test1 += test2
-        self.assertEquals(test1, result + test2)
+    # Service function for iadd operator
+    def iaddOperatorTest(self, test1Param, test2Param):
+        result = test1Param
+        test1Param += test2Param
+        self.assertEquals(test1Param, result + test2Param)
 
-    # Help function for postIncrement operator
-    def postIncrementOperatorTest(self, test1):
-        result = test1.unlimitedNumber
-        self.assertEquals(test1.postIncrement().unlimitedNumber, result)
-        # to show that test1 value change after reading it's value
-        self.assertEquals(test1.unlimitedNumber, result + 1)
+    # Service function for post-increment operator
+    def postIncrementOperatorTest(self, test1Param):
+        result = test1Param.unlimitedNumber
+        self.assertEquals(test1Param.postIncrement().unlimitedNumber, result)
+        # to show that test1 value incremented after reading it's value
+        self.assertEquals(test1Param.unlimitedNumber, result + 1)
 
+    # Service function for pre-increment operator
+    def preIncrementOperatorTest(self, test1Param):
+        result = test1Param.unlimitedNumber
+        self.assertEquals(test1Param.preIncrement().unlimitedNumber, result + 1)
+        # to ensure that test1Param value incremented before reading the value
+        self.assertEquals(test1Param.unlimitedNumber, result + 1)
 
-    # Help function for preIncrement operator
-    def preIncrementOperatorTest(self, test1):
-        result = test1.unlimitedNumber
-        self.assertEquals(test1.preIncrement().unlimitedNumber, result + 1)
-        # to ensure that test1 value change before reading the value
-        self.assertEquals(test1.unlimitedNumber, result + 1)
+    # Service function for sub operator
+    def subOperatorTest(self, test1Param, test2Param):
+        result = test1Param - test2Param
+        self.assertEquals(result, test1Param - test2Param)
 
-    # Unit test for check Unilmited type limits
-    def test_unlimitedTypeLimits(self):
-        test1 = Unlimited()
-        test1.randomUnlimitedNumber(100)
-        test2 = Unlimited()
-        test2.randomUnlimitedNumber(100)
-        if test1 >= test2:
-            print("if")
-            self.assertGreaterEqual(test1, test2)
-           # self.equalOperatorTest(test1, test2)
-            self.addOperatorTest(test1, test2)
-            self.iaddOperatorTest(test1, test2)
-            self.postIncrementOperatorTest(test1)
-            self.preIncrementOperatorTest(test1)
-            print("end if")
-        else:
-            print("else")
+    # Service function for isub operator
+    def isubOperatorTest(self, test1Param, test2Param):
+        result = test1Param
+        test1Param -= test2Param
+        self.assertEquals(test1Param, result - test2Param)
 
+    # Service function for post-increment operator
+    def postDecrementOperatorTest(self, test1Param):
+        result = test1Param.unlimitedNumber
+        self.assertEquals(test1Param.postDecrement().unlimitedNumber, result)
+        # to show that test1 value incremented after reading it's value
+        self.assertEquals(test1Param.unlimitedNumber, result - 1)
 
-
+    # Service function for pre-increment operator
+    def preDecrementOperatorTest(self, test1Param):
+        result = test1Param.unlimitedNumber
+        self.assertEquals(test1Param.preDecrement().unlimitedNumber, result - 1)
+        # to ensure that test1Param value incremented before reading the value
+        self.assertEquals(test1Param.unlimitedNumber, result - 1)
 
 
 if __name__ == '__main__':
